@@ -44,8 +44,7 @@ public class DaoConfiguration {
         properties.setProperty("useSSL", env.getProperty("useSSL"));
         properties.setProperty("serverTimezone", env.getProperty("serverTimezone"));
         properties.setProperty("createDatabaseIfNotExist", env.getProperty("createDatabaseIfNotExist"));
-        properties.setProperty("jdbcCompliantTruncation", env.getProperty("jdbcCompliantTruncation"));
-        properties.setProperty("sessionVariables", env.getProperty("sessionVariables"));
+        properties.setProperty("characterEncoding", env.getProperty("characterEncoding"));
         return properties;
     }
 
