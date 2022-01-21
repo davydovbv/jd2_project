@@ -16,6 +16,11 @@
     body {
         font-family: montserrat, arial, verdana;
     }
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
     /*form styles*/
     .card {
         width: 50%;

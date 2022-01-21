@@ -24,7 +24,6 @@
                         <td>
                             <button class="action-button" onclick="document.location='/chattydog/friends/${user.id}'">Add to Friends</button>
                             <button class="action-button" onclick="document.location='/chattydog/chats/user/${user.id}'">Sen Message</button>
-                            <button class="action-button" onclick="document.location='#'">Block</button>
                         </td>
                     </tr>
                 </table>

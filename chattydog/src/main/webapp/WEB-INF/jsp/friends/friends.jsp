@@ -24,7 +24,6 @@
                         <td>
                             <button class="action-button" onclick="document.location='/chattydog/friends/remove/${friend.id}'">Remove</button>
                             <button class="action-button" onclick="document.location='/chattydog/chats/${friend.id}'">Sen Message</button>
-                            <button class="action-button" onclick="document.location='#'">Block</button>
                         </td>
                     </tr>
                 </table>

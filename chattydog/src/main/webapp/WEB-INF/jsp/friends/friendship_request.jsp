@@ -24,7 +24,6 @@
                         <td>
                             <button class="action-button" onclick="document.location='/chattydog/friends/requests/${request.id}'">Accept</button>
                             <button class="action-button" onclick="document.location='#'">Decline</button>
-                            <button class="action-button" onclick="document.location='#'">Block</button>
                         </td>
                     </tr>
                 </table>
