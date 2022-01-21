@@ -36,7 +36,7 @@
                         <ul id="myTab" class="nav nav-pills">
                             <c:if test="${requestScope.showButtons == true}">
                                 <li class="active"><button class="action-button" onclick="document.location='/chattydog/friends/${requestScope.user.id}'">Add to Friends</button></li>
-                            <li class=""><button class="action-button" onclick="document.location='#'">Send Message</button></li>
+                            <li class=""><button class="action-button" onclick="document.location='/chattydog/chats/user/${requestScope.user.id}'">Send Message</button></li>
                             </c:if>
                         </ul>
                         <div id="myTabContent" class="tab-content">
