@@ -23,7 +23,7 @@
                         </td>
                         <td>
                             <button class="action-button" onclick="document.location='/chattydog/friends/requests/${request.id}'">Accept</button>
-                            <button class="action-button" onclick="document.location='#'">Decline</button>
+                            <button class="action-button" onclick="document.location='/chattydog/friends/decline/${request.id}'">Decline</button>
                         </td>
                     </tr>
                 </table>

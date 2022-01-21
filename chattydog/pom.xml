@@ -62,6 +62,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <warName>chattydog</warName>
+                    <resourceEncoding>UTF-8</resourceEncoding>
                 </configuration>
             </plugin>
             <plugin>

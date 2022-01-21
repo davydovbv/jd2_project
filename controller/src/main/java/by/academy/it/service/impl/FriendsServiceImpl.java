@@ -66,6 +66,15 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     @Transactional
+    public void declineRequest(int receiverId, int requestOwnerId) {
+        AppUser owner = userService.findUserById(requestOwnerId);
+        AppUser receiver = userService.findUserById(receiverId);
+        Friends incomingFriendRequest = friendDao.findUserFriend(owner, receiver);
+        friendDao.removeFromFriends(incomingFriendRequest);
+    }
+
+    @Override
+    @Transactional
     public List<UserForSearchDto> getAllFriends(int ownerId) {
         AppUser owner = userService.findUserById(ownerId);
         return friendDao.findAllFriends(owner).stream()

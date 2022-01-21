@@ -85,4 +85,13 @@ public class FriendsController {
         return "redirect:" + referer;
     }
 
+    @GetMapping("/friends/decline/{id}")
+    public String declineFriendRequest(HttpServletRequest httpServletRequest, @PathVariable("id") int requestOwnerId) {
+        AppUserCredentials receiver = dbAuthenticationService.getCurrentUser();
+        friendsService.declineRequest(receiver.getAppUserId(), requestOwnerId);
+        String referer = httpServletRequest.getHeader("Referer");
+        return "redirect:" + referer;
+    }
+
+
 }
