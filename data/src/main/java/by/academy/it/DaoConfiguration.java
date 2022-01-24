@@ -52,9 +52,9 @@ public class DaoConfiguration {
     @Bean
     public DataSource chattyDogDataSource(Properties dataSourceProperties) {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(env.getProperty("url"));
-        config.setUsername(env.getProperty("user"));
-        config.setPassword(env.getProperty("password"));
+        config.setJdbcUrl("jdbc:mysql://dog-chatty.cmolwpyrnjpy.us-east-1.rds.amazonaws.com:3306/chatty_dog");
+        config.setUsername("root");
+        config.setPassword("awdqse123");
         config.setDriverClassName(env.getProperty("jdbc.driver"));
         config.setMaximumPoolSize(env.getProperty("pool_size", Integer.class));
         config.setDataSourceProperties(dataSourceProperties);
