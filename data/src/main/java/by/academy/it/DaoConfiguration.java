@@ -45,6 +45,9 @@ public class DaoConfiguration {
         properties.setProperty("serverTimezone", env.getProperty("serverTimezone"));
         properties.setProperty("createDatabaseIfNotExist", env.getProperty("createDatabaseIfNotExist"));
         properties.setProperty("characterEncoding", env.getProperty("characterEncoding"));
+        properties.setProperty("url", env.getProperty("url"));
+        properties.setProperty("username", env.getProperty("username"));
+        properties.setProperty("password", env.getProperty("password"));
         return properties;
     }
 
@@ -52,9 +55,9 @@ public class DaoConfiguration {
     @Bean
     public DataSource chattyDogDataSource(Properties dataSourceProperties) {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://dog-chatty.cmolwpyrnjpy.us-east-1.rds.amazonaws.com:3306/chatty_dog");
-        config.setUsername("root");
-        config.setPassword("awdqse123");
+        config.setJdbcUrl(env.getProperty("url"));
+        config.setUsername("username");
+        config.setPassword("password");
         config.setDriverClassName(env.getProperty("jdbc.driver"));
         config.setMaximumPoolSize(env.getProperty("pool_size", Integer.class));
         config.setDataSourceProperties(dataSourceProperties);
