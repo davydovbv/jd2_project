@@ -26,7 +26,6 @@ public class MainController {
 
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public ModelAndView accessDenied() {
-
         return new ModelAndView("403");
     }
 

@@ -3,7 +3,6 @@ package by.academy.it.service;
 import by.academy.it.dto.user.user.UserForSearchDto;
 import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.service.security.DbAuthenticationService;
-import by.academy.it.user.pojo.AppUser;
 import by.academy.it.user.pojo.AppUserCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,7 @@ public class FriendsController {
     @GetMapping("/friends/find")
     public ModelAndView getAllUsers(){
         AppUserCredentials currentUser = dbAuthenticationService.getCurrentUser();
-        List<UserForSearchDto> users = userService.getAllUsersForSearch(currentUser.getAppUserId());
+        List<UserForSearchDto> users = userService.getAllUsersForFriendSearch(currentUser.getAppUserId());
         ModelAndView modelAndView = new ModelAndView("friends/find_friends");
         modelAndView.addObject("users", users);
         return modelAndView;
@@ -71,7 +70,7 @@ public class FriendsController {
     @GetMapping("/friends")
     public ModelAndView getAllFriends() {
         AppUserCredentials owner = dbAuthenticationService.getCurrentUser();
-        List<UserForSearchDto> allFriends = friendsService.getAllFriends(owner.getAppUserId());
+        List<UserForSearchDto> allFriends = friendsService.getAllFriendsDto(owner.getAppUserId());
         ModelAndView modelAndView = new ModelAndView("friends/friends");
         modelAndView.addObject("friends",allFriends);
         return modelAndView;

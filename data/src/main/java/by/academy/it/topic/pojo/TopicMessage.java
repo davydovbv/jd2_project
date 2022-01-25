@@ -1,6 +1,5 @@
 package by.academy.it.topic.pojo;
 
-import by.academy.it.topic.pojo.Topic;
 import by.academy.it.user.pojo.AppUser;
 import lombok.Data;
 

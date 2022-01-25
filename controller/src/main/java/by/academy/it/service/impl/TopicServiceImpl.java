@@ -1,6 +1,5 @@
 package by.academy.it.service.impl;
 
-import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.converter.topic.TopicCreateDtoToTopicConverter;
 import by.academy.it.converter.topic.TopicForSearchDtoConverter;
 import by.academy.it.converter.topic.TopicPageDtoConverter;
@@ -8,32 +7,36 @@ import by.academy.it.dao.TopicDao;
 import by.academy.it.dto.topic.TopicCreateDto;
 import by.academy.it.dto.topic.TopicForSearchDto;
 import by.academy.it.dto.topic.TopicPageDto;
+import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.service.TopicService;
 import by.academy.it.service.UserService;
 import by.academy.it.topic.pojo.Topic;
+import by.academy.it.topic.pojo.TopicMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TopicServiceImpl implements TopicService {
     @Autowired
-    TopicDao topicDao;
+    private TopicDao topicDao;
 
     @Autowired
-    TopicForSearchDtoConverter topicForSearchDtoConverter;
+    private TopicForSearchDtoConverter topicForSearchDtoConverter;
 
     @Autowired
-    TopicCreateDtoToTopicConverter topicCreateDtoToTopicConverter;
+    private TopicCreateDtoToTopicConverter topicCreateDtoToTopicConverter;
 
     @Autowired
-    TopicPageDtoConverter topicPageDtoConverter;
+    private TopicPageDtoConverter topicPageDtoConverter;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
     @Override
@@ -58,6 +61,12 @@ public class TopicServiceImpl implements TopicService {
         Topic topic = getTopicById(topicId);
         if (topic == null) {
             throw new IllegalArgumentException("Topic with id: " + topicId + "doesn't exist");
+        }
+        List<TopicMessage> sorted= topic.getMessages();
+        if(sorted != null) {
+            sorted.sort(Comparator.comparing(TopicMessage::getCreated));
+            Collections.reverse(sorted);
+            topic.setMessages(sorted);
         }
         return topicPageDtoConverter.convert(topic);
     }

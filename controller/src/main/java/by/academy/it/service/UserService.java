@@ -2,9 +2,7 @@ package by.academy.it.service;
 
 import by.academy.it.chat.pojo.PrivateChat;
 import by.academy.it.dto.chat.ChatFoChatListDto;
-import by.academy.it.dto.chat.ChatWithUserDto;
 import by.academy.it.dto.topic.TopicForSearchDto;
-import by.academy.it.dto.topic.TopicPageDto;
 import by.academy.it.dto.user.user.UserForSearchDto;
 import by.academy.it.dto.user.user.UserInformationDto;
 import by.academy.it.dto.user.user.UserRegistrationDto;
@@ -23,7 +21,7 @@ public interface UserService {
 
     AppUserCredentials findUserByLogin(String login);
 
-    List<UserForSearchDto> getAllUsersForSearch(int currentUserId);
+    List<UserForSearchDto> getAllUsersForFriendSearch(int currentUserId);
 
     UserInformationDto getUserInformation(int appUserId);
 

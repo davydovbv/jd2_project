@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 @Service
 public class FriendsServiceImpl implements FriendsService {
     @Autowired
-    FriendDao friendDao;
+    private FriendDao friendDao;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
     @Autowired
-    UserForSearchDtoConverter userForSearchDtoConverter;
+    private UserForSearchDtoConverter userForSearchDtoConverter;
 
 
     @Override
@@ -75,7 +75,7 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     @Transactional
-    public List<UserForSearchDto> getAllFriends(int ownerId) {
+    public List<UserForSearchDto> getAllFriendsDto(int ownerId) {
         AppUser owner = userService.findUserById(ownerId);
         return friendDao.findAllFriends(owner).stream()
                 .filter(friend -> friend.getStatus().contains(RequestStatus.APPROVED))

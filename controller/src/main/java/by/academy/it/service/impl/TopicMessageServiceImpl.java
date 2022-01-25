@@ -5,7 +5,7 @@ import by.academy.it.dao.TopicMessageDao;
 import by.academy.it.dto.topic.TopicMessageCreateDto;
 import by.academy.it.service.TopicService;
 import by.academy.it.service.UserService;
-import by.academy.it.service.security.TopicMessageService;
+import by.academy.it.service.TopicMessageService;
 import by.academy.it.topic.pojo.TopicMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TopicMessageServiceImpl implements TopicMessageService {
     @Autowired
-    TopicMessageDao topicMessageDao;
+    private TopicMessageDao topicMessageDao;
 
     @Autowired
-    TopicMessageCreateDtoTopicMessageConverter topicMessageCreateDtoTopicMessageConverter;
+    private TopicMessageCreateDtoTopicMessageConverter topicMessageCreateDtoTopicMessageConverter;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
 
     @Override
     @Transactional

@@ -2,8 +2,6 @@ package by.academy.it.dto.chat;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class PrivateMessageDto {
     private int messageId;
@@ -11,5 +9,5 @@ public class PrivateMessageDto {
     private int senderId;
     private String senderFullName;
     private String content;
-    private LocalDateTime created;
+    private String created;
 }

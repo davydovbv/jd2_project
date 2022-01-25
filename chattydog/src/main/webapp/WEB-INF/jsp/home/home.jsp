@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <jsp:include page="home_style.jsp"/>
     <title>Home</title>
 </head>
@@ -35,7 +36,9 @@
                     <div class="panel-body">
                         <ul id="myTab" class="nav nav-pills">
                             <c:if test="${requestScope.showButtons == true}">
+                                <c:if test="${requestScope.user.friend == false}">
                                 <li class="active"><button class="action-button" onclick="document.location='/chattydog/friends/${requestScope.user.id}'">Add to Friends</button></li>
+                                </c:if>
                             <li class=""><button class="action-button" onclick="document.location='/chattydog/chats/user/${requestScope.user.id}'">Send Message</button></li>
                             </c:if>
                         </ul>

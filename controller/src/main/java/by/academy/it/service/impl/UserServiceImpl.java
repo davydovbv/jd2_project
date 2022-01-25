@@ -1,8 +1,6 @@
 package by.academy.it.service.impl;
 
-import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.chat.pojo.PrivateChat;
-import by.academy.it.converter.chat.ChatToChatWithUserConverter;
 import by.academy.it.converter.chat.PrivateChatToChatForChatListDtoConverter;
 import by.academy.it.converter.topic.TopicForSearchDtoConverter;
 import by.academy.it.converter.user.UserForSearchDtoConverter;
@@ -14,14 +12,16 @@ import by.academy.it.dao.AppUserCredentialsDao;
 import by.academy.it.dao.AppUserDao;
 import by.academy.it.dao.FriendDao;
 import by.academy.it.dto.chat.ChatFoChatListDto;
-import by.academy.it.dto.chat.ChatWithUserDto;
 import by.academy.it.dto.topic.TopicForSearchDto;
 import by.academy.it.dto.user.user.UserForSearchDto;
 import by.academy.it.dto.user.user.UserInformationDto;
 import by.academy.it.dto.user.user.UserRegistrationDto;
+import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.service.ChatService;
+import by.academy.it.service.FriendsService;
 import by.academy.it.service.TopicService;
 import by.academy.it.service.UserService;
+import by.academy.it.service.security.DbAuthenticationService;
 import by.academy.it.topic.pojo.Topic;
 import by.academy.it.user.pojo.AppUser;
 import by.academy.it.user.pojo.AppUserContactDetails;
@@ -48,7 +48,13 @@ public class UserServiceImpl implements UserService {
     private AppUserCredentialsDao appUserCredentialsDao;
 
     @Autowired
-    TopicService topicService;
+    private TopicService topicService;
+
+    @Autowired
+    private FriendsService friendsService;
+
+    @Autowired
+    private DbAuthenticationService dbAuthenticationService;
 
     @Autowired
     private PrivateChatToChatForChatListDtoConverter privateChatToChatForChatListDtoConverter;
@@ -69,16 +75,13 @@ public class UserServiceImpl implements UserService {
     private UserForSearchDtoConverter userForSearchDtoConverter;
 
     @Autowired
-    private ChatToChatWithUserConverter chatToChatWithUserConverter;
-
-    @Autowired
     private TopicForSearchDtoConverter topicForSearchDtoConverter;
 
     @Autowired
     private FriendDao friendDao;
 
     @Autowired
-    ChatService chatService;
+    private ChatService chatService;
 
 
     @Override
@@ -91,7 +94,7 @@ public class UserServiceImpl implements UserService {
         AppUserCredentials appUserCredentials = userRegistrationDtoToAppUserCredentialsConverter.convert(userRegistrationDto);
         appUserCredentials.setAppUserId(appUserId);
         appUserCredentials.setActive(true);
-        appUserCredentials.setRoles(Collections.singleton(UserRole.USER));
+        appUserCredentials.setRoles(Collections.singletonList(UserRole.USER));
         appUserCredentialsDao.save(appUserCredentials);
     }
 
@@ -102,7 +105,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserForSearchDto> getAllUsersForSearch(int currentAppUserId) {
+    public List<UserForSearchDto> getAllUsersForFriendSearch(int currentAppUserId) {
         AppUser currentUser = findUserById(currentAppUserId);
         List<Integer> allFriendsId = friendDao.findAllFriends(currentUser).stream()
                 .map(friend -> friend.getFriend().getId())
@@ -119,7 +122,9 @@ public class UserServiceImpl implements UserService {
    @Transactional
     public UserInformationDto getUserInformation(int appUserId) {
         AppUser appUser = findUserById(appUserId);
-        return userInformationDtoConverter.convert(appUser);
+        UserInformationDto userInformationDto = userInformationDtoConverter.convert(appUser);
+        userInformationDto.setFriend(isUserFriend(appUserId));
+        return userInformationDto;
     }
 
     @Override
@@ -209,4 +214,12 @@ public class UserServiceImpl implements UserService {
         topics.put("personal", personalTopics);
         return topics;
     }
+     public boolean isUserFriend(int targetUserId) {
+         AppUserCredentials currentUser = dbAuthenticationService.getCurrentUser();
+         List<UserForSearchDto> users = friendsService.getAllFriendsDto(currentUser.getId())
+                 .stream()
+                 .filter(userForSearchDto -> userForSearchDto.getId() == targetUserId)
+                 .collect(Collectors.toList());
+         return !users.isEmpty();
+     }
 }

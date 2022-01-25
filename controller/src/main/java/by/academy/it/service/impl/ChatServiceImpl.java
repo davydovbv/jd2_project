@@ -1,10 +1,11 @@
 package by.academy.it.service.impl;
 
+import by.academy.it.chat.pojo.PrivateChat;
+import by.academy.it.chat.pojo.PrivateMessage;
 import by.academy.it.converter.chat.ChatToChatWithUserConverter;
+import by.academy.it.dao.PrivateChatDao;
 import by.academy.it.dto.chat.ChatWithUserDto;
 import by.academy.it.exceptions.ContentNotFoundException;
-import by.academy.it.chat.pojo.PrivateChat;
-import by.academy.it.dao.PrivateChatDao;
 import by.academy.it.service.ChatService;
 import by.academy.it.service.UserService;
 import by.academy.it.user.pojo.AppUser;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -52,6 +55,10 @@ public class ChatServiceImpl implements ChatService {
     @Transactional
     public ChatWithUserDto findChatWithUseDtoById(int chatId, int currentUserId) {
         PrivateChat chat = findById(chatId);
+        List<PrivateMessage> sorted= chat.getMessages();
+        sorted.sort(Comparator.comparing(PrivateMessage::getCreated));
+        Collections.reverse(sorted);
+        chat.setMessages(sorted);
         return chatToChatWithUserConverter.convert(chat, currentUserId);
     }
 

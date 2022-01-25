@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 @Repository
@@ -21,7 +20,6 @@ public class AppUserDaoImpl implements AppUserDao {
     @Qualifier("chattyDogSessionFactory")
     private SessionFactory sessionFactory;
 
-    @Transactional
     public int saveUser(AppUser appUser) {
         Session session = sessionFactory.getCurrentSession();
         Serializable id = session.save(appUser);

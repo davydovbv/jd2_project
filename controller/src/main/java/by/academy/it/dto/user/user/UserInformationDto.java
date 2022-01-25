@@ -15,4 +15,5 @@ public class UserInformationDto {
     private String instagram;
     private String phone;
     private String email;
+    private boolean friend;
 }

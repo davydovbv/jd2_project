@@ -42,4 +42,24 @@ public class AppUserCredentialsDaoImpl implements AppUserCredentialsDao {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select c.appUserId from AppUserCredentials c where c.active = true", Integer.class).list();
     }
+
+    @Override
+    public List<Integer> getAllBlockedUsersId() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select c.appUserId from AppUserCredentials c where c.active = false", Integer.class).list();
+    }
+
+    @Override
+    public AppUserCredentials getByAppUserId(int appUserId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+         return currentSession
+                 .createQuery("from AppUserCredentials where appUserId = ?1", AppUserCredentials.class)
+                 .setParameter(1, appUserId)
+                 .uniqueResult();
+    }
+
+    public void update(AppUserCredentials appUserCredentials) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(appUserCredentials);
+    }
 }

@@ -6,7 +6,6 @@ import by.academy.it.dto.topic.TopicMessageCreateDto;
 import by.academy.it.dto.topic.TopicPageDto;
 import by.academy.it.exceptions.ContentNotFoundException;
 import by.academy.it.service.security.DbAuthenticationService;
-import by.academy.it.service.security.TopicMessageService;
 import by.academy.it.user.pojo.AppUserCredentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +61,7 @@ public class TopicController {
         Integer creatorId = dbAuthenticationService.getCurrentUser().getId();
         int topicId = topicService.createTopic(topicCreateDto, creatorId);
         userService.addTopicToFavorite(topicId, creatorId);
-        return "redirect:/topics/";
+        return "redirect:/topics/favorite";
     }
 
     @GetMapping("/topics/{id}")
@@ -110,7 +109,7 @@ public class TopicController {
     public String removeTopicFromFavorite(@PathVariable("id") int topicId) {
         AppUserCredentials current = dbAuthenticationService.getCurrentUser();
         userService.removeTopicFromFavorite(topicId, current.getAppUserId());
-        return "redirect:/topics/";
+        return "redirect:/topics/favorite";
     }
 
     @GetMapping("/topics/{id}/delete")

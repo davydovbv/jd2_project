@@ -5,6 +5,8 @@ import by.academy.it.dto.chat.PrivateMessageDto;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
+
 @Component
 @Data
 public class PrivateMessageDtoConverter {
@@ -15,7 +17,7 @@ public class PrivateMessageDtoConverter {
         privateMessageDto.setSenderId(privateMessage.getSender().getId());
         privateMessageDto.setSenderFullName(privateMessage.getSender().getFirstName() + " " + privateMessage.getSender().getLastName());
         privateMessageDto.setContent(privateMessage.getContent());
-        privateMessageDto.setCreated(privateMessage.getCreated());
+        privateMessageDto.setCreated(privateMessage.getCreated().format(DateTimeFormatter.ofPattern("dd/mm/yyyy hh:mm:ss")));
         return privateMessageDto;
     }
 }

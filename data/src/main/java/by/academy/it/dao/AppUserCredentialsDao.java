@@ -8,4 +8,7 @@ public interface AppUserCredentialsDao {
     AppUserCredentials findByUsername(String username);
     void save(AppUserCredentials appUserCredentials);
     List<Integer> getAllActiveUsersId();
+    List<Integer> getAllBlockedUsersId();
+    AppUserCredentials getByAppUserId(int appUserId);
+    void update(AppUserCredentials appUserCredentials);
 }

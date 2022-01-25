@@ -2,6 +2,7 @@
 <html>
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <title>Find Friends</title>
     <jsp:include page="topic_page_style.jsp"/>
 </head>
@@ -36,6 +37,15 @@
         <div class="description">
             ${requestScope.topic.description}
         </div>
+        <form id="msform" method="post" action="/chattydog/topics/${topic.id}/message">
+            <fieldset>
+                <h2 class="fs-title">Post your message</h2>
+                <label>
+                    <textarea form="msform" name="content" placeholder="Type your message"></textarea>
+                </label>
+                <input type="submit" name="submit" class="submit action-button" value="Post" />
+            </fieldset>
+        </form>
         <c:forEach var="message" items="${requestScope.topic.messages}">
             <div class="message">
                 <div class="message_author"><a href="/chattydog/home/${message.authorId}">${message.authorName}</a>
@@ -46,15 +56,6 @@
                 </div>
             </div>
         </c:forEach>
-        <form id="msform" method="post" action="/chattydog/topics/${topic.id}/message">
-            <fieldset>
-                <h2 class="fs-title">Post your message</h2>
-                <label>
-                    <textarea form="msform" name="content" placeholder="Type your message"></textarea>
-                </label>
-                <input type="submit" name="submit" class="submit action-button" value="Post" />
-            </fieldset>
-        </form>
         <jsp:include page="create_topic_js.jsp"/>
     </div>
 </body>

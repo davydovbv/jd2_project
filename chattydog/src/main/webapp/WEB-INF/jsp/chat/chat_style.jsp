@@ -19,11 +19,9 @@
         color: black;
     }
 
-    .container {
-        width: 75%;
-        margin: 50px auto;
-        text-align: center;
-        position: relative;
+    .page {
+        max-height: calc(100vh - 3.5rem);
+        overflow: auto;
     }
 
     .chats_container {
@@ -34,10 +32,6 @@
         text-align: center;
     }
     .chat_container {
-        width: 70%;
-        margin: 30px auto;
-        float: right;
-        display: block;
         text-align: center;
     }
 
@@ -107,10 +101,8 @@
 
     /*form styles*/
     #msform {
-        width: 400px;
-        margin: 50px auto;
+        margin: 15px auto;
         text-align: center;
-        position: relative;
     }
     #msform fieldset {
         background: white;
@@ -118,8 +110,6 @@
         border-radius: 3px;
         box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
         padding: 20px 30px;
-        box-sizing: border-box;
-        width: 80%;
         margin: 0 10%;
 
         /*stacking fieldsets above each other*/

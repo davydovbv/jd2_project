@@ -6,6 +6,7 @@ import by.academy.it.dto.chat.ChatFoChatListDto;
 import by.academy.it.user.pojo.AppUser;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class PrivateChatToChatForChatListDtoConverter {
             PrivateMessage message = chat.getMessages().get(messages.size()-1);
             chatForChatListDto.setSenderId(message.getSender().getId());
             chatForChatListDto.setSenderName(message.getSender().getFirstName());
-            chatForChatListDto.setCreated(message.getCreated());
+            chatForChatListDto.setCreated(message.getCreated().format(DateTimeFormatter.ofPattern("dd/mm/yyyy hh:mm:ss")));
             chatForChatListDto.setLastMessageContent(message.getContent());
         }
         return chatForChatListDto;

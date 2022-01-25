@@ -21,7 +21,7 @@ public class MessageServiceImpl implements MessageService {
     private UserService userService;
 
     @Autowired
-    PrivateMessageDao privateMessageDao;
+    private PrivateMessageDao privateMessageDao;
 
     @Override
     public int save(PrivateMessageCreateDto privateMessageCreateDto) {
