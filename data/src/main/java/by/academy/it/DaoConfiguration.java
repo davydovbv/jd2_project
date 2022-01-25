@@ -6,8 +6,6 @@ import by.academy.it.topic.pojo.Topic;
 import by.academy.it.topic.pojo.TopicMessage;
 import by.academy.it.user.pojo.AppUser;
 import by.academy.it.user.pojo.AppUserCredentials;
-import by.academy.it.user.pojo.BlackListOwners;
-import by.academy.it.user.pojo.BlockedUsers;
 import by.academy.it.user.pojo.Friends;
 import by.academy.it.user.pojo.AppUserContactDetails;
 import by.academy.it.user.pojo.UserRole;
@@ -46,7 +44,7 @@ public class DaoConfiguration {
         properties.setProperty("createDatabaseIfNotExist", env.getProperty("createDatabaseIfNotExist"));
         properties.setProperty("characterEncoding", env.getProperty("characterEncoding"));
         properties.setProperty("url", env.getProperty("url"));
-        properties.setProperty("username", env.getProperty("username"));
+        properties.setProperty("user", env.getProperty("user"));
         properties.setProperty("password", env.getProperty("password"));
         return properties;
     }
@@ -55,9 +53,9 @@ public class DaoConfiguration {
     @Bean
     public DataSource chattyDogDataSource(Properties dataSourceProperties) {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(env.getProperty("url"));
-        config.setUsername("username");
-        config.setPassword("password");
+        config.setJdbcUrl("jdbc:mysql://dog-chatty.cmolwpyrnjpy.us-east-1.rds.amazonaws.com:3306/chatty_dog");
+        config.setUsername("root");
+        config.setPassword("awdqse123");
         config.setDriverClassName(env.getProperty("jdbc.driver"));
         config.setMaximumPoolSize(env.getProperty("pool_size", Integer.class));
         config.setDataSourceProperties(dataSourceProperties);
@@ -76,8 +74,7 @@ public class DaoConfiguration {
         properties.setProperty("show_sql", "true");
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         sessionFactory.setHibernateProperties(properties);
-        sessionFactory.setAnnotatedClasses(BlackListOwners.class, BlockedUsers.class, Friends.class,
-                AppUserContactDetails.class, UserRole.class, AppUser.class, PrivateMessage.class, PrivateChat.class, AppUserCredentials.class,
+        sessionFactory.setAnnotatedClasses(Friends.class, AppUserContactDetails.class, UserRole.class, AppUser.class, PrivateMessage.class, PrivateChat.class, AppUserCredentials.class,
                 TopicMessage.class, Topic.class);
         return sessionFactory;
     }
