@@ -15,7 +15,7 @@
                 <table style="text-align: center; width: 100%">
                     <tr>
                         <td>
-                            <img class="img" src="https://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg">
+                            <img class="img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEVYWFjSB0xIAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC">
                         </td>
                         <td>
                             <h3><a href="/chattydog/home/${friend.id}" >${friend.firstName} ${friend.lastName}</a></h3>

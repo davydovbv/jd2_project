@@ -24,7 +24,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="text-center" id="author">
-                            <img src="https://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEVYWFjSB0xIAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC">
                             <h3>${requestScope.user.firstName} ${requestScope.user.lastName}</h3>
                             <small class="label label-warning">${requestScope.user.country}</small>
                         </div>
